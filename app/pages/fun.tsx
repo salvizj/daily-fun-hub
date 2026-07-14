@@ -2,8 +2,10 @@ import GeneratorPicker from "~/features/fun/components/GeneratorPicker"
 import type { Route } from "./+types/fun"
 import { GeneratorKeys, type Generator } from "~/types/types"
 import { useState } from "react"
-import FactDisplay from "~/features/fun/components/FactDisplay"
-import JokeDisplay from "~/features/fun/components/JokeDisplay"
+import { fetchRandomFact } from "~/api/facts"
+import { fetchRandomJoke } from "~/api/joke"
+import GeneratorDisplay from "~/features/fun/components/GeneratorDisplay"
+import ChallangeDisplay from "~/features/fun/components/ChallangeDisplay"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -26,11 +28,11 @@ export default function Fun() {
 						Please select a generator to get started.
 					</div>
 				) : selectedGenerator === GeneratorKeys.FUN ? (
-					<FactDisplay />
+					<GeneratorDisplay fetchRandomFn={fetchRandomFact} />
 				) : selectedGenerator === GeneratorKeys.JOKE ? (
-					<JokeDisplay />
+					<GeneratorDisplay fetchRandomFn={fetchRandomJoke} />
 				) : selectedGenerator === GeneratorKeys.CHALLENGE ? (
-					<FactDisplay />
+					<ChallangeDisplay />
 				) : null}
 			</div>
 		</>
