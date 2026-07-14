@@ -15,7 +15,7 @@ const useGenerator = (fetchRandomFn: () => Promise<string>) => {
 		} finally {
 			setIsLoading(false)
 		}
-	}, [])
+	}, [fetchRandomFn])
 
 	return { isLoading, error, getGeneratorFetch }
 }

@@ -28,7 +28,10 @@ export type FieldConfig = TextFieldConfig | SelectFieldConfig | FileFieldConfig
 export type Variant =
 	"primary" | "secondary" | "accent" | "outline" | "ghost" | "danger"
 
-export type Theme = "light" | "dark"
+export enum Theme {
+	LIGHT = "light",
+	DARK = "dark",
+}
 
 export type Generator = {
 	key: GeneratorKeys

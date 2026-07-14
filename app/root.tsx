@@ -14,6 +14,7 @@ import { useTheme } from "./hooks/useTheme"
 import { getTheme } from "./utils/theme"
 import NavBar from "./components/ui/NavBar"
 import { Footer } from "./components/Footer"
+import { Theme } from "./types/types"
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,10 +35,10 @@ export function loader({ request }: Route.LoaderArgs) {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-	const theme = useLoaderData<typeof loader>()?.theme ?? "light"
+	const theme = useLoaderData<typeof loader>()?.theme ?? Theme.LIGHT
 
 	return (
-		<html lang="en" className={theme === "dark" ? "dark" : ""}>
+		<html lang="en" className={theme === Theme.DARK ? Theme.DARK : ""}>
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -54,7 +55,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	const initialTheme = useLoaderData<typeof loader>()?.theme ?? "light"
+	const initialTheme = useLoaderData<typeof loader>()?.theme ?? Theme.LIGHT
 	const { themeToggle } = useTheme(initialTheme)
 	return (
 		<div className="min-h-screen bg-surface text-content flex flex-col">

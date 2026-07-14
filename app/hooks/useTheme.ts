@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
+import { Theme } from "~/types/types"
 import { setCookie } from "~/utils/cookie"
 
-type Theme = "light" | "dark"
-
 const toggleDocumentClass = (theme: Theme) => {
-	if (theme === "dark") {
+	if (theme === Theme.DARK) {
 		document.documentElement.classList.add("dark")
 	} else {
 		document.documentElement.classList.remove("dark")
@@ -20,7 +19,7 @@ export const useTheme = (initialTheme: Theme) => {
 	}, [theme])
 
 	const themeToggle = () => {
-		setTheme((prev) => (prev === "light" ? "dark" : "light"))
+		setTheme((prev) => (prev === Theme.LIGHT ? Theme.DARK : Theme.LIGHT))
 	}
 
 	return { theme, themeToggle }

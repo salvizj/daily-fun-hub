@@ -1,5 +1,7 @@
-export function getTheme(request: Request): "light" | "dark" {
+import { Theme } from "~/types/types"
+
+export function getTheme(request: Request): Theme {
 	const cookieHeader = request.headers.get("Cookie") || ""
 	const match = cookieHeader.match(/(?:^|; )theme=([^;]*)/)
-	return match?.[1] === "dark" ? "dark" : "light"
+	return match?.[1] === "dark" ? Theme.DARK : Theme.LIGHT
 }

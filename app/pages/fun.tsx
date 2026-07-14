@@ -14,8 +14,6 @@ export function meta({}: Route.MetaArgs) {
 export default function Fun() {
 	const [selectedGenerator, setSelectedGenerator] =
 		useState<GeneratorKeys | null>(null)
-	console.log("Selected Generator:", selectedGenerator) // Debugging line
-
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center gap-4">
