@@ -16,22 +16,30 @@ export default function Fun() {
 		useState<GeneratorKeys | null>(null)
 	return (
 		<>
-			<div className="flex flex-col items-center justify-center gap-4">
+			<div className="flex flex-col items-center justify-center gap-8 flex-1">
+				<div className="text-center mb-2">
+					<h1 className="text-2xl font-bold text-content">Daily Fun Hub</h1>
+					<p className="text-content-muted text-sm mt-1">
+						Facts, jokes, and daily challenges.
+					</p>
+				</div>
 				<GeneratorPicker
 					selectedGenerator={selectedGenerator}
 					setSelectedGenerator={setSelectedGenerator}
 				/>
-				{selectedGenerator === null ? (
-					<div className="text-content-muted text-sm">
-						Please select a generator to get started.
-					</div>
-				) : selectedGenerator === GeneratorKeys.FUN ? (
-					<GeneratorDisplay fetchRandomFn={fetchRandomFact} />
-				) : selectedGenerator === GeneratorKeys.JOKE ? (
-					<GeneratorDisplay fetchRandomFn={fetchRandomJoke} />
-				) : selectedGenerator === GeneratorKeys.CHALLENGE ? (
-					<ChallangeDisplay />
-				) : null}
+				<div className="flex flex-col items-center justify-center gap-4 w-full">
+					{selectedGenerator === null ? (
+						<div className="text-content-muted text-sm">
+							Please select a generator to get started.
+						</div>
+					) : selectedGenerator === GeneratorKeys.FUN ? (
+						<GeneratorDisplay fetchRandomFn={fetchRandomFact} />
+					) : selectedGenerator === GeneratorKeys.JOKE ? (
+						<GeneratorDisplay fetchRandomFn={fetchRandomJoke} />
+					) : selectedGenerator === GeneratorKeys.CHALLENGE ? (
+						<ChallangeDisplay />
+					) : null}
+				</div>
 			</div>
 		</>
 	)

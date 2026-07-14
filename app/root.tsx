@@ -60,7 +60,7 @@ export default function App() {
 	return (
 		<div className="min-h-screen bg-surface text-content flex flex-col">
 			<NavBar themeToggle={themeToggle} />
-			<main className="flex-1 pt-20 p-4 max-w-screen w-full">
+			<main className="flex-1 flex pt-20 p-4 w-full h-full">
 				<Outlet />
 			</main>
 			<Footer />

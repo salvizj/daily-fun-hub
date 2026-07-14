@@ -1,3 +1,5 @@
+import Card from "~/components/ui/Card"
+
 const ChallangeDisplay = () => {
 	const ACTIVITIES = [
 		"go for a walk",
@@ -73,7 +75,11 @@ const ChallangeDisplay = () => {
 
 	const challenge = generateChallenge()
 
-	return <p className="text-content">{challenge}</p>
+	return (
+		<Card className="flex flex-col items-center justify-center gap-4 max-w-2xl w-full">
+			<p className="text-content">{challenge}</p>
+		</Card>
+	)
 }
 
 export default ChallangeDisplay
