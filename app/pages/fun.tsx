@@ -4,8 +4,9 @@ import { GeneratorKeys, type Generator } from "~/types/types"
 import { useState } from "react"
 import { fetchRandomFact } from "~/api/facts"
 import { fetchRandomJoke } from "~/api/joke"
-import GeneratorDisplay from "~/features/fun/components/GeneratorDisplay"
 import ChallangeDisplay from "~/features/fun/components/ChallangeDisplay"
+import RandomContentDisplay from "~/components/RandomContentDisplay"
+import useRandomContent from "~/hooks/useRandomContent"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -14,6 +15,15 @@ export function meta({}: Route.MetaArgs) {
 export default function Fun() {
 	const [selectedGenerator, setSelectedGenerator] =
 		useState<GeneratorKeys | null>(null)
+
+	const { isLoading, error, data, refetchData } = useRandomContent(
+		selectedGenerator === GeneratorKeys.FUN
+			? fetchRandomFact
+			: selectedGenerator === GeneratorKeys.JOKE
+				? fetchRandomJoke
+				: async () => "No generator selected",
+	)
+
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center gap-8 flex-1">
@@ -33,9 +43,21 @@ export default function Fun() {
 							Please select a generator to get started.
 						</div>
 					) : selectedGenerator === GeneratorKeys.FUN ? (
-						<GeneratorDisplay fetchRandomFn={fetchRandomFact} />
+						<RandomContentDisplay
+							isLoading={isLoading}
+							error={error}
+							data={data}
+							refetchData={refetchData}
+							randomContentLabel="fact"
+						/>
 					) : selectedGenerator === GeneratorKeys.JOKE ? (
-						<GeneratorDisplay fetchRandomFn={fetchRandomJoke} />
+						<RandomContentDisplay
+							isLoading={isLoading}
+							error={error}
+							data={data}
+							refetchData={refetchData}
+							randomContentLabel="joke"
+						/>
 					) : selectedGenerator === GeneratorKeys.CHALLENGE ? (
 						<ChallangeDisplay />
 					) : null}
