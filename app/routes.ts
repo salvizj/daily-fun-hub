@@ -1,6 +1,9 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes"
 
 export default [
-	index("routes/dashboard.tsx"),
-	route("transactions", "routes/transactions.tsx"),
+	index("pages/dashboard.tsx"),
+	route("fun", "pages/fun.tsx"),
+	route("habits", "pages/habits.tsx"),
+	route("mood", "pages/mood.tsx"),
+	route("stats", "pages/stats.tsx"),
 ] satisfies RouteConfig

@@ -11,6 +11,9 @@ import {
 import type { Route } from "./+types/root"
 import "./app.css"
 import { useTheme } from "./hooks/useTheme"
+import { getTheme } from "./utils/theme"
+import NavBar from "./components/ui/NavBar"
+import { Footer } from "./components/Footer"
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -52,8 +55,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
 	const initialTheme = useLoaderData<typeof loader>()?.theme ?? "light"
-	const { theme, themeToggle } = useTheme(initialTheme)
-	return <Outlet />
+	const { themeToggle } = useTheme(initialTheme)
+	return (
+		<div className="min-h-screen bg-surface text-content flex flex-col">
+			<NavBar themeToggle={themeToggle} />
+			<main className="flex-1 pt-20 p-4 max-w-screen w-full">
+				<Outlet />
+			</main>
+			<Footer />
+		</div>
+	)
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

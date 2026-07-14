@@ -79,10 +79,14 @@ The project should demonstrate understanding of:
 
 Create pages:
 
-`/` | Dashboard  
- `/mood` | Mood Tracker  
+`/` | Dashboard
+
+`/mood` | Mood Tracker
+
 `/habits` | Habit Tracker
+
 `/fun` | Fun Generator
+
 `/stats` | Statistics
 
 Use: `react-router-dom`
@@ -180,11 +184,19 @@ src/
 The solution will be considered successful if:
 
 ✅ React app runs without errors
+
 ✅ Routing works correctly
+
 ✅ Data persists after page refresh
+
 ✅ At least one API is integrated
+
 ✅ Responsive on desktop and mobile
+
 ✅ Error handling is implemented
+
 ✅ Code is split into reusable components
+
 ✅ Application follows ESLint formatting rules
+
 ✅ README is provided with setup instructions
