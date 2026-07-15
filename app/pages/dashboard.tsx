@@ -4,7 +4,7 @@ import RandomContentDisplay from "~/components/RandomContentDisplay"
 import GoalsDisplay from "~/features/dashboard/components/GoalsDisplay"
 import useRandomContent from "~/hooks/useRandomContent"
 import { useState } from "react"
-import { ModalType } from "~/types/types"
+import { ModalType, type Goal } from "~/types/types"
 import GoalForm from "~/features/dashboard/components/GoalsForm"
 import type { GoalSchema } from "~/schemas/goalsSchema"
 import { useLocalStorage } from "~/hooks/useLocalStorage"
@@ -18,10 +18,14 @@ export default function Home() {
 	const { isLoading, error, data, refetchData } =
 		useRandomContent(fetchRandomQuote)
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
-	const { storedValue, setValue } = useLocalStorage<GoalSchema>("goals")
+	const { storedValue, setValue, updateValue } = useLocalStorage<Goal>("goals")
 
 	const handleSubmit = (data: GoalSchema) => {
-		setValue(data)
+		const newGoal: Goal = {
+			goal: data.goal,
+			checked: false,
+		}
+		setValue(newGoal)
 		setOpenModal(null)
 	}
 
@@ -46,7 +50,7 @@ export default function Home() {
 				<Button onClick={() => setOpenModal(ModalType.GoalForm)}>
 					Add Goal
 				</Button>
-				<GoalsDisplay goals={storedValue} />
+				<GoalsDisplay goals={storedValue} updateValue={updateValue} />
 				<GoalForm
 					isOpen={openModal === ModalType.GoalForm}
 					onClose={() => setOpenModal(null)}

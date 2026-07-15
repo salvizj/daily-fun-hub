@@ -49,3 +49,7 @@ export enum ModalType {
 	GoalForm = "goalForm",
 	Confirm = "confirm",
 }
+export type Goal = {
+	goal: string
+	checked: boolean
+}

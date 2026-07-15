@@ -5,6 +5,7 @@ type InputProps = {
 	placeholder: string
 	required?: boolean
 	value?: string
+	checked?: boolean
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -16,6 +17,7 @@ const Input = ({
 	required = false,
 	value,
 	onChange,
+	checked,
 }: InputProps) => {
 	return (
 		<div className="flex flex-col gap-1">
@@ -51,6 +53,7 @@ const Input = ({
 				placeholder={placeholder}
 				required={required ?? false}
 				value={value}
+				checked={checked}
 				onChange={onChange}
 			/>
 			{error && <span className="text-xs text-error">{error}</span>}
