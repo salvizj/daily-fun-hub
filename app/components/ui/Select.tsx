@@ -15,18 +15,19 @@ const Select = ({
 	value,
 	onChange,
 }: SelectProps) => {
+	const id = `select-${label}`
 	return (
 		<div className="flex flex-col gap-1">
 			{label && (
 				<label
-					htmlFor={`select-${label}`}
+					htmlFor={id}
 					className="text-sm font-medium text-content-secondary"
 				>
 					{label}
 				</label>
 			)}
 			<select
-				id={`select-${label}`}
+				id={id}
 				className={`
           px-3 py-2 rounded-md border bg-surface-elevated text-content
           focus:outline-none focus:ring-2 focus:ring-primary-light focus:border-primary

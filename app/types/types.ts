@@ -44,3 +44,8 @@ export enum GeneratorKeys {
 	JOKE = "joke",
 	CHALLENGE = "challenge",
 }
+
+export enum ModalType {
+	GoalForm = "goalForm",
+	Confirm = "confirm",
+}
