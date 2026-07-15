@@ -46,10 +46,25 @@ export enum GeneratorKeys {
 }
 
 export enum ModalType {
+	MoodForm = "moodForm",
 	GoalForm = "goalForm",
 	Confirm = "confirm",
 }
+
 export type Goal = {
 	goal: string
 	checked: boolean
+}
+
+export type Mood = {
+	mood: MoodEmoji
+	label: string
+	date: string
+}
+
+export enum MoodEmoji {
+	GREAT = "😀",
+	GOOD = "🙂",
+	OKAY = "😐",
+	BAD = "😔",
 }
