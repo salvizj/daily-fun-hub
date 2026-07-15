@@ -9,6 +9,8 @@ import GoalForm from "~/features/dashboard/components/GoalsForm"
 import type { GoalSchema } from "~/schemas/goalsSchema"
 import { useLocalStorage } from "~/hooks/useLocalStorage"
 import Button from "~/components/ui/Button"
+import ConfirmDialog from "~/components/ConfirmDialog"
+import SectionHeader from "~/components/SectionHeader"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -18,8 +20,8 @@ export default function Home() {
 	const { isLoading, error, data, refetchData } =
 		useRandomContent(fetchRandomQuote)
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
-	const { storedValue, setValue, updateValue } = useLocalStorage<Goal>("goals")
-
+	const { storedValue, setValue, updateValue, deleteValue } =
+		useLocalStorage<Goal>("goals")
 	const handleSubmit = (data: GoalSchema) => {
 		const newGoal: Goal = {
 			goal: data.goal,
@@ -28,16 +30,27 @@ export default function Home() {
 		setValue(newGoal)
 		setOpenModal(null)
 	}
+	const [deletingGoal, setDeletingGoal] = useState<Goal | null>(null)
+
+	const initiateDeleteGoal = (goal: Goal) => {
+		setOpenModal(ModalType.Confirm)
+		setDeletingGoal(goal)
+	}
+
+	const handleGoalDeletion = () => {
+		if (openModal === ModalType.Confirm && deletingGoal != null) {
+			deleteValue(deletingGoal)
+			setDeletingGoal(null)
+		}
+	}
 
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center gap-8 flex-1">
-				<div className="text-center mb-2">
-					<h1 className="text-2xl font-bold text-content">Daily Fun Hub</h1>
-					<p className="text-content-muted text-sm mt-1">
-						Daily quotes and todays goals.
-					</p>
-				</div>
+				<SectionHeader
+					title={"Daily Dashoard Hub"}
+					subtitle="Daily quotes and todays goals."
+				/>
 				<div className="flex flex-col items-center justify-center gap-4 w-full">
 					<RandomContentDisplay
 						isLoading={isLoading}
@@ -47,14 +60,26 @@ export default function Home() {
 						randomContentLabel="quote"
 					/>
 				</div>
-				<Button onClick={() => setOpenModal(ModalType.GoalForm)}>
-					Add Goal
-				</Button>
-				<GoalsDisplay goals={storedValue} updateValue={updateValue} />
+				<SectionHeader
+					title={"Goals"}
+					subtitle="Add your goals and keep track of them."
+				/>
+				<GoalsDisplay
+					goals={storedValue}
+					updateValue={updateValue}
+					initiateDeleteGoal={initiateDeleteGoal}
+					setOpenModal={setOpenModal}
+				/>
 				<GoalForm
 					isOpen={openModal === ModalType.GoalForm}
 					onClose={() => setOpenModal(null)}
 					onSubmit={handleSubmit}
+				/>
+				<ConfirmDialog
+					isOpen={openModal === ModalType.Confirm}
+					onClose={() => setOpenModal(null)}
+					onConfirm={handleGoalDeletion}
+					message="This goal will be permanently deleted."
 				/>
 			</div>
 		</>

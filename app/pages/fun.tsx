@@ -7,6 +7,7 @@ import { fetchRandomJoke } from "~/api/joke"
 import ChallangeDisplay from "~/features/fun/components/ChallangeDisplay"
 import RandomContentDisplay from "~/components/RandomContentDisplay"
 import useRandomContent from "~/hooks/useRandomContent"
+import SectionHeader from "~/components/SectionHeader"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -27,12 +28,10 @@ export default function Fun() {
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center gap-8 flex-1">
-				<div className="text-center mb-2">
-					<h1 className="text-2xl font-bold text-content">Daily Fun Hub</h1>
-					<p className="text-content-muted text-sm mt-1">
-						Facts, jokes, and daily challenges.
-					</p>
-				</div>
+				<SectionHeader
+					title={"Daily Fun Hub"}
+					subtitle="Daily jokes, facts and challanges."
+				/>
 				<GeneratorPicker
 					selectedGenerator={selectedGenerator}
 					setSelectedGenerator={setSelectedGenerator}

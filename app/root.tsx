@@ -12,7 +12,7 @@ import type { Route } from "./+types/root"
 import "./app.css"
 import { useTheme } from "./hooks/useTheme"
 import { getTheme } from "./utils/theme"
-import NavBar from "./components/ui/NavBar"
+import NavBar from "./components/NavBar"
 import { Footer } from "./components/Footer"
 import { Theme } from "./types/types"
 

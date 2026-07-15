@@ -1,6 +1,6 @@
 import { NavLink } from "react-router"
 import { House, PartyPopper, ListChecks, Smile, BarChart3 } from "lucide-react"
-import { ThemeToggler } from "../ThemeToggler"
+import { ThemeToggler } from "./ThemeToggler"
 
 type NavBarProps = {
 	themeToggle: () => void
