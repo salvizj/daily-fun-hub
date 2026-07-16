@@ -8,7 +8,6 @@ import { ModalType, type Goal } from "~/types/types"
 import GoalForm from "~/features/dashboard/components/GoalsForm"
 import type { GoalSchema } from "~/schemas/goalsSchema"
 import { useLocalStorage } from "~/hooks/useLocalStorage"
-import Button from "~/components/ui/Button"
 import ConfirmDialog from "~/components/ConfirmDialog"
 import SectionHeader from "~/components/SectionHeader"
 

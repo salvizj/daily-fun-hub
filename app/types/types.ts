@@ -47,6 +47,7 @@ export enum GeneratorKeys {
 
 export enum ModalType {
 	MoodForm = "moodForm",
+	HabitForm = "habitForm",
 	GoalForm = "goalForm",
 	Confirm = "confirm",
 }
@@ -67,4 +68,9 @@ export enum MoodEmoji {
 	GOOD = "🙂",
 	OKAY = "😐",
 	BAD = "😔",
+}
+
+export type Habit = {
+	habit: string
+	checked: boolean
 }

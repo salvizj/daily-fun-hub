@@ -2,51 +2,49 @@ import { Trash2 } from "lucide-react"
 import Button from "~/components/ui/Button"
 import Card from "~/components/ui/Card"
 import Input from "~/components/ui/Input"
-import { ModalType, type Goal } from "~/types/types"
+import { ModalType, type Habit } from "~/types/types"
 
-type GoalsDisplayProps = {
-	goals: Goal[] | null
-	updateValue: (oldValue: Goal, newValue: Goal) => void
-	initiateDeleteGoal: (goal: Goal) => void
+type HabitsDisplayProps = {
+	habits: Habit[] | null
+	updateValue: (oldValue: Habit, newValue: Habit) => void
+	initiateDeleteHabit: (habit: Habit) => void
 	setOpenModal: (modalType: ModalType) => void
 }
 
-const GoalsDisplay = ({
-	goals,
+const HabitsDisplay = ({
+	habits,
 	updateValue,
-	initiateDeleteGoal,
+	initiateDeleteHabit,
 	setOpenModal,
-}: GoalsDisplayProps) => {
-	const updateGoalChecked = (index: number) => {
-		if (!goals) return
+}: HabitsDisplayProps) => {
+	const updateHabitChecked = (index: number) => {
+		if (!habits) return
 
-		const updatedGoals = [...goals]
-		updatedGoals[index].checked = !updatedGoals[index].checked
+		const updatedHabits = [...habits]
+		updatedHabits[index].checked = !updatedHabits[index].checked
 
-		updateValue(goals[index], updatedGoals[index])
+		updateValue(habits[index], updatedHabits[index])
 	}
-
-	if (goals === null || goals.length === 0) {
+	if (habits === null || habits.length === 0) {
 		return (
 			<div className="flex flex-col gap-2 justify-center">
-				<div className="text-content-muted text-sm">No goals added yet.</div>
+				<div className="text-content-muted text-sm">No habits added yet.</div>
 				<Button
-					onClick={() => setOpenModal(ModalType.GoalForm)}
+					onClick={() => setOpenModal(ModalType.HabitForm)}
 					className="self-center"
 				>
-					Add Goal
+					Add Habit
 				</Button>
 			</div>
 		)
 	}
-
 	return (
 		<div className="flex flex-col items-center justify-center w-full">
 			<Card
 				className="flex flex-col gap-2 w-full max-w-md border border-border p-4 rounded-2xl bg-surface-elevated"
-				title="Goals"
+				title="Habits"
 			>
-				{goals.map((goal, index) => (
+				{habits.map((habit, index) => (
 					<div
 						key={index}
 						className="flex flex-row items-center gap-2 justify-between"
@@ -55,21 +53,21 @@ const GoalsDisplay = ({
 							<Input
 								type={"checkbox"}
 								placeholder={"completed"}
-								checked={goal.checked}
-								onChange={() => updateGoalChecked(index)}
+								checked={habit.checked}
+								onChange={() => updateHabitChecked(index)}
 							/>
 							<span
 								className={
-									goal.checked
+									habit.checked
 										? "line-through text-content-muted"
 										: "text-content"
 								}
 							>
-								{goal.goal}
+								{habit.habit}
 							</span>
 						</div>
 						<Button
-							onClick={() => initiateDeleteGoal(goal)}
+							onClick={() => initiateDeleteHabit(habit)}
 							noFocus={true}
 							variant="ghost"
 						>
@@ -78,13 +76,13 @@ const GoalsDisplay = ({
 					</div>
 				))}
 				<Button
-					onClick={() => setOpenModal(ModalType.GoalForm)}
+					onClick={() => setOpenModal(ModalType.HabitForm)}
 					className="self-center"
 				>
-					Add Another Goal
+					Add Another Habit
 				</Button>
 			</Card>
 		</div>
 	)
 }
-export default GoalsDisplay
+export default HabitsDisplay
