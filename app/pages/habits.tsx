@@ -38,6 +38,9 @@ export default function Habits() {
 		}
 	}
 
+	const completedHabitCount =
+		storedValue?.filter((habit) => habit.checked).length ?? 0
+
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center gap-8 flex-1">
@@ -45,6 +48,13 @@ export default function Habits() {
 					title={"Daily Habit Hub"}
 					subtitle="Add your habits and keep track of them."
 				/>
+				<h3>
+					Current progress:
+					{storedValue?.length
+						? Math.round((completedHabitCount / storedValue.length) * 100)
+						: 0}
+					%
+				</h3>
 				<HabitsDisplay
 					habits={storedValue}
 					updateValue={updateValue}

@@ -14,7 +14,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Mood() {
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
-	const { storedValue, setValue } = useLocalStorage<Mood>("mood")
+	const { storedValue, setValue } = useLocalStorage<Mood>("moods")
 
 	const todaysDate = new Date().toISOString().slice(0, 10)
 	const handleSubmit = (mood: MoodSchema) => {
