@@ -7,7 +7,6 @@ import MoodForm from "~/features/mood/components/MoodForm"
 import type { Mood, MoodEmoji } from "~/types/types"
 import type { MoodSchema } from "~/schemas/moodSchema"
 import { MOODS } from "~/constants/constants"
-import Button from "~/components/ui/Button"
 import MoodDisplay from "~/features/mood/components/MoodDisplay"
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -19,7 +18,7 @@ export default function Mood() {
 
 	const todaysDate = new Date().toISOString().slice(0, 10)
 	const handleSubmit = (mood: MoodSchema) => {
-		const matchedMood = MOODS.find((m) => m.key === mood.mood)
+		const matchedMood = MOODS.find((m) => m.mood === mood.mood)
 		const newMood: Mood = {
 			mood: mood.mood as MoodEmoji,
 			label: matchedMood?.label ?? "",
@@ -38,7 +37,7 @@ export default function Mood() {
 					onSubmit={handleSubmit}
 				/>
 				<MoodDisplay
-					moods={storedValue}
+					moods={storedValue ?? []}
 					setOpenModal={() => setOpenModal(ModalType.MoodForm)}
 					todaysDate={todaysDate}
 				/>
