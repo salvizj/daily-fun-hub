@@ -10,6 +10,8 @@ import type { GoalSchema } from "~/schemas/goalsSchema"
 import { useLocalStorage } from "~/hooks/useLocalStorage"
 import ConfirmDialog from "~/components/ConfirmDialog"
 import SectionHeader from "~/components/SectionHeader"
+import Input from "~/components/ui/Input"
+import useSearch from "~/hooks/useSearch"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -43,6 +45,7 @@ export default function Home() {
 		}
 	}
 
+	const { query, setQuery, results } = useSearch(storedValue ?? [])
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center gap-8 flex-1">
@@ -63,8 +66,14 @@ export default function Home() {
 					title={"Goals"}
 					subtitle="Add your goals and keep track of them."
 				/>
+				<Input
+					type={"text"}
+					placeholder={"Search"}
+					onChange={(e) => setQuery(e.target.value)}
+					value={query}
+				/>
 				<GoalsDisplay
-					goals={storedValue}
+					goals={results}
 					updateValue={updateValue}
 					initiateDeleteGoal={initiateDeleteGoal}
 					setOpenModal={setOpenModal}
