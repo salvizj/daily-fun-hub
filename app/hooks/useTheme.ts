@@ -10,7 +10,7 @@ const toggleDocumentClass = (theme: Theme) => {
 	}
 }
 
-export const useTheme = (initialTheme: Theme) => {
+const useTheme = (initialTheme: Theme) => {
 	const [theme, setTheme] = useState<Theme>(initialTheme)
 
 	useEffect(() => {
@@ -24,3 +24,4 @@ export const useTheme = (initialTheme: Theme) => {
 
 	return { theme, themeToggle }
 }
+export default useTheme

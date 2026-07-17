@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export function useLocalStorage<T>(key: string) {
+const useLocalStorage = <T>(key: string) => {
 	const [storedValue, setStoredValue] = useState<T[] | null>(null)
 
 	useEffect(() => {
@@ -13,6 +13,7 @@ export function useLocalStorage<T>(key: string) {
 	}, [key])
 
 	const setValue = (value: T) => {
+		if (!storedValue) return storedValue
 		try {
 			setStoredValue((prev) => {
 				const updated = [...(prev ?? []), value]
@@ -24,8 +25,9 @@ export function useLocalStorage<T>(key: string) {
 		}
 	}
 	const updateValue = (value: T, oldValue: T) => {
+		if (!storedValue) return storedValue
 		try {
-			const updated = (storedValue ?? []).map((item) =>
+			const updated = storedValue.map((item) =>
 				JSON.stringify(item) === JSON.stringify(oldValue) ? value : item,
 			)
 			setStoredValue(updated)
@@ -36,8 +38,9 @@ export function useLocalStorage<T>(key: string) {
 	}
 
 	const deleteValue = (value: T) => {
+		if (!storedValue) return storedValue
 		try {
-			const deleted = (storedValue ?? []).filter(
+			const deleted = storedValue.filter(
 				(item) => JSON.stringify(item) !== JSON.stringify(value),
 			)
 			setStoredValue(deleted)
@@ -47,5 +50,24 @@ export function useLocalStorage<T>(key: string) {
 		}
 	}
 
-	return { storedValue, setValue, deleteValue, updateValue }
+	const switchValues = (draggedValue: T, targetValue: T) => {
+		if (!storedValue) return storedValue
+		try {
+			let indexA = -1
+			let indexB = -1
+
+			for (let i = 0; i < storedValue.length; i++) {
+				if (storedValue[i] === draggedValue) indexA = i
+				if (storedValue[i] === targetValue) indexB = i
+			}
+			if (indexA === -1 || indexB === -1) return storedValue
+			const updated = [...storedValue]
+			;[updated[indexA], updated[indexB]] = [updated[indexB], updated[indexA]]
+			setStoredValue(updated)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	return { storedValue, setValue, deleteValue, updateValue, switchValues }
 }
+export default useLocalStorage

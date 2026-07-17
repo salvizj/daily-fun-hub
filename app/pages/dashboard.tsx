@@ -7,11 +7,12 @@ import { useState } from "react"
 import { ModalType, type Goal } from "~/types/types"
 import GoalForm from "~/features/dashboard/components/GoalsForm"
 import type { GoalSchema } from "~/schemas/goalsSchema"
-import { useLocalStorage } from "~/hooks/useLocalStorage"
 import ConfirmDialog from "~/components/ConfirmDialog"
 import SectionHeader from "~/components/SectionHeader"
 import Input from "~/components/ui/Input"
 import useSearch from "~/hooks/useSearch"
+import useLocalStorage from "~/hooks/useLocalStorage"
+import useDragSwitch from "~/hooks/useDragSwitch"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -21,8 +22,15 @@ export default function Home() {
 	const { isLoading, error, data, refetchData } =
 		useRandomContent(fetchRandomQuote)
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
-	const { storedValue, setValue, updateValue, deleteValue } =
+	const { storedValue, setValue, updateValue, deleteValue, switchValues } =
 		useLocalStorage<Goal>("goals")
+	const {
+		draggingItem,
+		handleDragStart,
+		handleDragOver,
+		handleOnDrop,
+		handleOnDragEnd,
+	} = useDragSwitch(switchValues)
 	const handleSubmit = (data: GoalSchema) => {
 		const newGoal: Goal = {
 			goal: data.goal,
@@ -77,6 +85,11 @@ export default function Home() {
 					updateValue={updateValue}
 					initiateDeleteGoal={initiateDeleteGoal}
 					setOpenModal={setOpenModal}
+					draggingItem={draggingItem}
+					handleDragStart={handleDragStart}
+					handleDragOver={handleDragOver}
+					handleOnDrop={handleOnDrop}
+					handleOnDragEnd={handleOnDragEnd}
 				/>
 				<GoalForm
 					isOpen={openModal === ModalType.GoalForm}

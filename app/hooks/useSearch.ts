@@ -7,7 +7,7 @@ function filterItems<T>(query: string, items: T[]): T[] {
 	)
 }
 
-function useSearch<T>(items: T[]) {
+const useSearch = <T>(items: T[]) => {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const query = searchParams.get("search") ?? ""
 
