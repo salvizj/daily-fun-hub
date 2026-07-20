@@ -12,7 +12,7 @@ const useLocalStorage = <T>(key: string) => {
 	}, [key])
 
 	const setValue = (value: T) => {
-		if (!storedValue) return storedValue
+		if (!storedValue) return
 		try {
 			setStoredValue((prev) => {
 				const updated = [...(prev ?? []), value]
@@ -37,7 +37,7 @@ const useLocalStorage = <T>(key: string) => {
 	}
 
 	const deleteValue = (value: T) => {
-		if (!storedValue) return storedValue
+		if (!storedValue) return
 		try {
 			const deleted = storedValue.filter(
 				(item) => JSON.stringify(item) !== JSON.stringify(value),
@@ -50,7 +50,7 @@ const useLocalStorage = <T>(key: string) => {
 	}
 
 	const switchValues = (draggedValue: T, targetValue: T) => {
-		if (!storedValue) return storedValue
+		if (!storedValue) return
 		try {
 			let indexA = -1
 			let indexB = -1
@@ -59,7 +59,7 @@ const useLocalStorage = <T>(key: string) => {
 				if (storedValue[i] === draggedValue) indexA = i
 				if (storedValue[i] === targetValue) indexB = i
 			}
-			if (indexA === -1 || indexB === -1) return storedValue
+			if (indexA === -1 || indexB === -1) return
 			const updated = [...storedValue]
 			;[updated[indexA], updated[indexB]] = [updated[indexB], updated[indexA]]
 			setStoredValue(updated)
@@ -67,6 +67,12 @@ const useLocalStorage = <T>(key: string) => {
 			console.error(error)
 		}
 	}
-	return { storedValue, setValue, deleteValue, updateValue, switchValues }
+	return {
+		storedValue,
+		setValue,
+		deleteValue,
+		updateValue,
+		switchValues,
+	}
 }
 export default useLocalStorage

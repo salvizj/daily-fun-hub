@@ -14,7 +14,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Habits() {
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
-	const { storedValue, setValue, updateValue, deleteValue } =
+	const { storedValue, setValue, updateValue, deleteValue, isDuplicate } =
 		useLocalStorage<Habit>("habits")
 	const handleSubmit = (data: HabitSchema) => {
 		const newHabit: Habit = {
@@ -64,6 +64,7 @@ export default function Habits() {
 				<HabitForm
 					isOpen={openModal === ModalType.HabitForm}
 					onClose={() => setOpenModal(null)}
+					habits={storedValue}
 					onSubmit={handleSubmit}
 				/>
 				<ConfirmDialog

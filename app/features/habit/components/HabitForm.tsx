@@ -1,17 +1,18 @@
 import { useState } from "react"
 import Form from "~/components/ui/Form"
-import type { FieldConfig } from "~/types/types"
+import type { FieldConfig, Habit } from "~/types/types"
 import type { z } from "zod"
 import Modal from "~/components/ui/Model"
-import { habitSchema, type HabitSchema } from "~/schemas/habitSchema"
+import { createHabitSchema, type HabitSchema } from "~/schemas/habitSchema"
 
 type HabitFormProps = {
 	isOpen: boolean
 	onClose: () => void
 	onSubmit: (data: HabitSchema) => void
+	habits: Habit[]
 }
 
-const HabitForm = ({ isOpen, onClose, onSubmit }: HabitFormProps) => {
+const HabitForm = ({ isOpen, onClose, onSubmit, habits }: HabitFormProps) => {
 	const [habit, setHabit] = useState("")
 	const [validationErrors, setValidationErrors] = useState<
 		Record<string, string>
@@ -22,7 +23,7 @@ const HabitForm = ({ isOpen, onClose, onSubmit }: HabitFormProps) => {
 		setValidationErrors({})
 
 		const formData = { habit }
-		const result = habitSchema.safeParse(formData)
+		const result = createHabitSchema(habits).safeParse(formData)
 
 		if (!result.success) {
 			const fieldErrors = Object.fromEntries(
@@ -35,7 +36,6 @@ const HabitForm = ({ isOpen, onClose, onSubmit }: HabitFormProps) => {
 			return
 		}
 
-		setValidationErrors({})
 		setHabit("")
 		onSubmit(result.data)
 	}
