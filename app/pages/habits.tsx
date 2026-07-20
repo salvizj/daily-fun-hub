@@ -1,12 +1,12 @@
 import type { Route } from "./+types/habits"
 import { useState } from "react"
 import { ModalType, type Habit } from "~/types/types"
-import { useLocalStorage } from "~/hooks/useLocalStorage"
 import ConfirmDialog from "~/components/ConfirmDialog"
 import SectionHeader from "~/components/SectionHeader"
 import type { HabitSchema } from "~/schemas/habitSchema"
 import HabitForm from "~/features/habit/components/HabitForm"
 import HabitsDisplay from "~/features/habit/components/HabitsDisplay"
+import useLocalStorage from "~/hooks/useLocalStorage"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]

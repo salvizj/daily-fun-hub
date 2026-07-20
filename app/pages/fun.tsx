@@ -1,6 +1,6 @@
 import GeneratorPicker from "~/features/fun/components/GeneratorPicker"
 import type { Route } from "./+types/fun"
-import { GeneratorKeys, type Generator } from "~/types/types"
+import { GeneratorKeys } from "~/types/types"
 import { useState } from "react"
 import { fetchRandomFact } from "~/api/facts"
 import { fetchRandomJoke } from "~/api/joke"

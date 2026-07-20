@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 
 const useLocalStorage = <T>(key: string) => {
-	const [storedValue, setStoredValue] = useState<T[] | null>(null)
-
+	const [storedValue, setStoredValue] = useState<T[]>([])
 	useEffect(() => {
 		try {
 			const item = localStorage.getItem(key)
-			setStoredValue(item ? (JSON.parse(item) as T[]) : null)
+			setStoredValue(item ? (JSON.parse(item) as T[]) : [])
 		} catch (error) {
 			console.error(error)
 		}

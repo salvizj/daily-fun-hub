@@ -1,8 +1,8 @@
-import { useLocalStorage } from "~/hooks/useLocalStorage"
 import type { Route } from "./+types/stats"
 import type { Goal, Habit, Mood } from "~/types/types"
 import { MOODS } from "~/constants/constants"
 import Card from "~/components/ui/Card"
+import useLocalStorage from "~/hooks/useLocalStorage"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
