@@ -35,7 +35,7 @@ const GeneratorPicker = ({
 	]
 
 	return (
-		<div className="flex flex-row gap-4 ">
+		<div className="flex md:flex-row gap-4 flex-col">
 			{GENERATORS.map((generator) => (
 				<Button
 					key={generator.key}

@@ -13,4 +13,4 @@ export const createHabitSchema = (storedValue?: Habit[]) =>
 				message: "This habit already exists",
 			}),
 	})
-export type HabitSchema = z.infer<typeof createHabitSchema>
+export type HabitSchema = z.infer<ReturnType<typeof createHabitSchema>>

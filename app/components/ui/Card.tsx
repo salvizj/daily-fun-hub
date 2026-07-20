@@ -7,7 +7,7 @@ type CardProps = {
 const Card = ({ title, children, className = "" }: CardProps) => {
 	return (
 		<div
-			className={`rounded-2xl border border-border bg-surface-elevated p-6 min-w-xl ${className}`}
+			className={`rounded-2xl border border-border bg-surface-elevated p-6 max-w-xl w-full ${className}`}
 		>
 			{title && (
 				<h3 className="text-lg font-bold text-content mb-3 text-center">

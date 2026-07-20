@@ -7,6 +7,7 @@ import type { HabitSchema } from "~/schemas/habitSchema"
 import HabitForm from "~/features/habit/components/HabitForm"
 import HabitsDisplay from "~/features/habit/components/HabitsDisplay"
 import useLocalStorage from "~/hooks/useLocalStorage"
+import ProgressBar from "~/components/ProgressBar"
 
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
@@ -14,7 +15,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Habits() {
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
-	const { storedValue, setValue, updateValue, deleteValue, isDuplicate } =
+	const { storedValue, setValue, updateValue, deleteValue } =
 		useLocalStorage<Habit>("habits")
 	const handleSubmit = (data: HabitSchema) => {
 		const newHabit: Habit = {
@@ -48,13 +49,13 @@ export default function Habits() {
 					title={"Daily Habit Hub"}
 					subtitle="Add your habits and keep track of them."
 				/>
-				<h3>
-					Current progress:
-					{storedValue?.length
-						? Math.round((completedHabitCount / storedValue.length) * 100)
-						: 0}
-					%
-				</h3>
+				<ProgressBar
+					percentage={
+						storedValue?.length
+							? Math.round((completedHabitCount / storedValue.length) * 100)
+							: 0
+					}
+				/>
 				<HabitsDisplay
 					habits={storedValue}
 					updateValue={updateValue}
