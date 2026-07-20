@@ -3,7 +3,9 @@ import type { Goal, Habit, Mood } from "~/types/types"
 import { MOODS } from "~/constants/constants"
 import Card from "~/components/ui/Card"
 import useLocalStorage from "~/hooks/useLocalStorage"
-
+import { useRef } from "react"
+import generatePDF from "react-to-pdf"
+import Button from "~/components/ui/Button"
 export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
 }
@@ -21,10 +23,10 @@ export default function Stats() {
 		label,
 		count: moods?.filter((m) => m.label === label).length ?? 0,
 	}))
-
+	const targetRef = useRef<HTMLDivElement>(null)
 	return (
 		<>
-			<div className="flex justify-center items-center flex-1">
+			<div className="flex justify-center items-center flex-1" ref={targetRef}>
 				<Card title="Statistics" className="flex flex-col gap-4 p-4">
 					<div className="flex justify-between text-sm">
 						<span className="text-content-muted">Goals</span>
@@ -32,14 +34,12 @@ export default function Stats() {
 							{checkedGoalsCount}/{goals?.length ?? 0}
 						</span>
 					</div>
-
 					<div className="flex justify-between text-sm">
 						<span className="text-content-muted">Habits</span>
 						<span className="text-content">
 							{checkedHabitCount}/{habits?.length ?? 0}
 						</span>
 					</div>
-
 					<div className="flex flex-col gap-2">
 						<h3 className="text-content-secondary text-sm">
 							Mood Distribution
@@ -61,6 +61,13 @@ export default function Stats() {
 							))}
 						</ul>
 					</div>
+					<Button
+						onClick={() => generatePDF(targetRef, { filename: "page.pdf" })}
+						variant="secondary"
+						className="self-center"
+					>
+						Download PDF
+					</Button>
 				</Card>
 			</div>
 		</>
