@@ -24,8 +24,9 @@ const MoodDisplay = ({
 		<div className="flex flex-col items-center justify-center w-full gap-4">
 			{todaysMood !== undefined ? (
 				<div className="flex flex-col items-center gap-1">
+					<h3 className="text-content-muted">Today's mood</h3>
+					<span className="text-md">{todaysMood?.label}</span>
 					<span className="text-5xl">{todaysMood?.mood}</span>
-					<p className="text-content-muted text-sm">Today's mood</p>
 				</div>
 			) : (
 				<Button onClick={() => setOpenModal(ModalType.MoodForm)} noFocus={true}>
@@ -38,15 +39,17 @@ const MoodDisplay = ({
 					className="flex flex-col gap-2 w-full max-w-md border border-border p-4 rounded-2xl bg-surface-elevated"
 					title="Mood over last 7 days:"
 				>
-					{sortedMoodByDateDesc.slice(0, 7).map((m) => (
-						<div
-							key={m.date}
-							className="flex flex-row items-center gap-2 justify-between"
-						>
-							<span className="text-2xl">{m.mood}</span>
-							<span className="text-content-muted text-sm">{m.date}</span>
-						</div>
-					))}
+					<div className="flex flex-row gap-4">
+						{sortedMoodByDateDesc.slice(0, 7).map((m, i) => (
+							<div key={m.date} className="flex flex-col gap-2 items-center">
+								<div className="">{m.label}</div>
+								<div className="text-3xl text-shadow-content-secondary">
+									{m.mood}
+								</div>
+								<div className="text-content-muted">Day: {i}</div>
+							</div>
+						))}
+					</div>
 				</Card>
 			)}
 		</div>
