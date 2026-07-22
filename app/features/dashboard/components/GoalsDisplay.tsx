@@ -6,7 +6,7 @@ import Input from "~/components/ui/Input"
 import { ModalType, type Goal } from "~/types/types"
 
 type GoalsDisplayProps = {
-	goals: Goal[] | null
+	goals: Goal[]
 	updateValue: (oldValue: Goal, newValue: Goal) => void
 	initiateDeleteGoal: (goal: Goal) => void
 	setOpenModal: (modalType: ModalType) => void
@@ -37,7 +37,7 @@ const GoalsDisplay = ({
 		updateValue(goals[index], updatedGoals[index])
 	}
 
-	if (goals === null || goals.length === 0) {
+	if (goals.length === 0) {
 		return (
 			<div className="flex flex-col gap-2 justify-center">
 				<div className="text-content-muted text-sm">No goals added yet.</div>

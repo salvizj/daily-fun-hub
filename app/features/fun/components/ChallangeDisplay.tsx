@@ -70,7 +70,7 @@ const ChallangeDisplay = () => {
 		const randomPlace =
 			PLACES[Math.floor(seededRandom(seed + 2) * PLACES.length)]
 
-		return `Your challenge: ${randomActivity} ${randomDuration} ${randomPlace}.`
+		return `Your challange: ${randomActivity} ${randomDuration} ${randomPlace}.`
 	}
 
 	const challenge = generateChallenge()
