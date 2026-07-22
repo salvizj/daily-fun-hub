@@ -12,9 +12,9 @@ import type { Route } from "./+types/root"
 import "./app.css"
 import { getTheme } from "./utils/theme"
 import NavBar from "./components/NavBar"
-import { Footer } from "./components/Footer"
 import { Theme } from "./types/types"
 import useTheme from "./hooks/useTheme"
+import Footer from "./components/Footer"
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },

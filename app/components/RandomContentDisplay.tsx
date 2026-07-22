@@ -16,9 +16,19 @@ const RandomContentDisplay = ({
 	refetchData,
 	randomContentLabel,
 }: RandomContentDisplayProps) => {
+	if (error)
+		return (
+			<Card className="flex flex-col items-center justify-center gap-10 max-w-xl w-full">
+				<p className="text-content">{error}</p>
+			</Card>
+		)
 	if (isLoading)
-		return <div className="text-content-muted text-sm">Loading...</div>
-	if (error) return <div className="text-error text-sm">{error}</div>
+		return (
+			<Card className="flex flex-col items-center justify-center gap-10 max-w-xl w-full">
+				<p className="text-content">Searching for content...</p>
+			</Card>
+		)
+
 	return (
 		<Card className="flex flex-col items-center justify-center gap-10 max-w-xl w-full">
 			<p className="text-content">{data}</p>
