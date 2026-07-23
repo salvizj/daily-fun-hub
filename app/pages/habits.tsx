@@ -13,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
 }
 
-export default function Habits() {
+const Habits = () => {
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
 	const { storedValue, setValue, updateValue, deleteValue } =
 		useLocalStorage<Habit>("habits")
@@ -78,3 +78,4 @@ export default function Habits() {
 		</>
 	)
 }
+export default Habits

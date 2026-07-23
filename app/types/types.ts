@@ -48,6 +48,7 @@ export enum GeneratorKeys {
 export enum ModalType {
 	MoodForm = "moodForm",
 	HabitForm = "habitForm",
+	ProfileForm = "profileForm",
 	GoalForm = "goalForm",
 	Confirm = "confirm",
 }

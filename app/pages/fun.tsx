@@ -13,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
 }
 
-export default function Fun() {
+const Fun = () => {
 	const [selectedGenerator, setSelectedGenerator] =
 		useState<GeneratorKeys | null>(null)
 
@@ -65,3 +65,4 @@ export default function Fun() {
 		</>
 	)
 }
+export default Fun

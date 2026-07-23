@@ -1,5 +1,12 @@
 import { NavLink } from "react-router"
-import { House, PartyPopper, ListChecks, Smile, BarChart3 } from "lucide-react"
+import {
+	House,
+	PartyPopper,
+	ListChecks,
+	Smile,
+	BarChart3,
+	User,
+} from "lucide-react"
 import { ThemeToggler } from "./ThemeToggler"
 
 type NavBarProps = {
@@ -13,6 +20,7 @@ const NavBar = ({ themeToggle }: NavBarProps) => {
 		{ path: "/habits", icon: <ListChecks /> },
 		{ path: "/mood", icon: <Smile /> },
 		{ path: "/stats", icon: <BarChart3 /> },
+		{ path: "/profile", icon: <User /> },
 	]
 
 	return (

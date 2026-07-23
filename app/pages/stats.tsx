@@ -11,7 +11,7 @@ export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
 }
 
-export default function Stats() {
+const Stats = () => {
 	const { storedValue: goals } = useLocalStorage<Goal>("goals")
 	const { storedValue: habits } = useLocalStorage<Habit>("habits")
 	const { storedValue: moods } = useLocalStorage<Mood>("moods")
@@ -57,3 +57,4 @@ export default function Stats() {
 		</>
 	)
 }
+export default Stats

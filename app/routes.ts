@@ -6,4 +6,5 @@ export default [
 	route("habits", "pages/habits.tsx"),
 	route("mood", "pages/mood.tsx"),
 	route("stats", "pages/stats.tsx"),
+	route("profile", "pages/profile.tsx"),
 ] satisfies RouteConfig

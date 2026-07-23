@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 	return [{ title: "Daily Fun Hub" }, { name: "", content: "" }]
 }
 
-export default function Home() {
+const Home = () => {
 	const { isLoading, error, data, refetchData } =
 		useRandomContent(fetchRandomQuote)
 	const [openModal, setOpenModal] = useState<ModalType | null>(null)
@@ -106,3 +106,4 @@ export default function Home() {
 		</>
 	)
 }
+export default Home
